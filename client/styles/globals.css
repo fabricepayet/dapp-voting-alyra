@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply h-[60px] py-5 uppercase px-6;
+}
+
+.btn:disabled {
+  @apply opacity-40;
+}
+
+.btn-primary {
+  @apply text-black-main bg-green-main px-10;
+}
+
+.btn-secondary {
+  @apply text-black-main bg-white px-10;
+}
+
+.btn-purple {
+  @apply text-white bg-purple-main px-10;
+}
