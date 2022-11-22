@@ -87,7 +87,7 @@ const ContractProvider: FC<Props> = ({ children }) => {
 
       return {
         voter: (voter as string).toLowerCase(),
-        proposalId: proposalId
+        proposalId: parseInt(proposalId)
       }
     })
     setVotes(previousVotes)
@@ -98,7 +98,7 @@ const ContractProvider: FC<Props> = ({ children }) => {
         ...votes,
         {
           voter: (voter as string).toLowerCase(),
-          proposalId: proposalId as number
+          proposalId: parseInt(proposalId)
         }
       ])
     })
