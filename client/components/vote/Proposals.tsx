@@ -15,7 +15,6 @@ const Proposals: FC<Props> = ({ className = "" }) => {
   const [isAddProposalModalOpen, setIsAddProposalModalOpen] = useState(false)
   const { proposalsIds, isRegistered, workflowStatus } = useContext(ContractContext)
 
-
   const onAddProposal = async (proposalDescription: string) => {
     if (!contract || !accounts || !accounts.length) return
     try {
@@ -33,7 +32,6 @@ const Proposals: FC<Props> = ({ className = "" }) => {
       </div>
     )
   }
-
 
   return (
     <div>

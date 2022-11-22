@@ -8,7 +8,13 @@ The objective was to develop a dApp for the voting contract provided by Alyra. T
 
 ### Contract
 
-I added as few modifications as possible in the contract, just adding Natspec for documentation, removing the genesis proposal to avoid side effects and prevent a DoS service in the addProposal function by adding a require:
+I added as few modifications as possible in the contract:  
+
+- add natspecs for documentation
+- remove the genesis proposal to avoid side effects
+- remove the modifier onlyVoters in the function getOneProposal to allow unregistered users to see the description of the proposal (as indicated in the instructions of the exercice)
+- prevent a DoS service by adding a check of the number of proposals in the addProposal function
+
 
 ```solidity
 require(proposalsArray.length < 1000, "Too many proposals");
@@ -16,13 +22,13 @@ require(proposalsArray.length < 1000, "Too many proposals");
 
 ### Front end
 
-I replace the default create-react-app provided [React Truffle Box](<https://trufflesuite.com/boxes/react/>) by NextJS and to develop with TypeScript.
+I developed my interfaces in TypeScript and I replaced the default create-react-app provided [React Truffle Box](<https://trufflesuite.com/boxes/react/>) by [NextJs](<https://nextjs.org/>). I used [TailwindCSS](<https://tailwindcss.com/>) for the styling of my components.
 
-I recorded a short video presenting the differents interfaces [link to the video (FR)](<https://>)
+I recorded a short video presenting the differents interfaces [[link to the video]](<https://www.loom.com/share/e49f2954a29149f79a002d32d158db14>) and deploy the dApp to Vercel [[link]](<https://dapp-voting-alyra.vercel.app>)
 
 ### Deployment
 
-I deployed the dApp on the goerli network:
+I deployed the dApp on the Goerli network. Here the deployment logs:
 
 ````bash
 truffle migrate --network goerli
@@ -42,32 +48,32 @@ Starting migrations...
 1_deploy_voting.js
 ==================
 
-   Deploying 'Voting'
+   Replacing 'Voting'
    ------------------
-   > transaction hash:    0x6f43373c8b7559a36eea39b29dd45176c3868ecddcf05245524203f22212e79d
-   > Blocks: 1            Seconds: 9
-   > contract address:    0x81e59565B1337B4202b687bA219D955642c0c25e
-   > block number:        7996007
-   > block timestamp:     1669077216
+   > transaction hash:    0x9e6814e47a580040965bb22868d477bf3943593da0ce3d0a27a7a4f0a2d6ecd2
+   > Blocks: 1            Seconds: 13
+   > contract address:    0x206b7a9FfaBa7B53F59B9a374ad29d87b915043f
+   > block number:        7998030
+   > block timestamp:     1669106664
    > account:             0x876476aF52Bd7C2184fFf2dE4543356E4Baa56cA
-   > balance:             0.447381509556330014
-   > gas used:            1975247 (0x1e23cf)
-   > gas price:           3.279654946 gwei
+   > balance:             0.312871882377055147
+   > gas used:            1944739 (0x1daca3)
+   > gas price:           68.155648605 gwei
    > value sent:          0 ETH
-   > total cost:          0.006478128593121662 ETH
+   > total cost:          0.132544947912439095 ETH
 
    Pausing for 2 confirmations...
 
    -------------------------------
-   > confirmation number: 1 (block: 7996008)
-   > confirmation number: 2 (block: 7996009)
+   > confirmation number: 1 (block: 7998031)
+   > confirmation number: 2 (block: 7998032)
    > Saving artifacts
    -------------------------------------
-   > Total cost:     0.006478128593121662 ETH
+   > Total cost:     0.132544947912439095 ETH
 
 Summary
 =======
 > Total deployments:   1
-> Final cost:          0.006478128593121662 ETH
+> Final cost:          0.132544947912439095 ETH
 
 ```

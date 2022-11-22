@@ -48,13 +48,22 @@ const ContractProvider: FC<Props> = ({ children }) => {
     setProposalsIds(previousProposalsIds)
   }, [contract])
 
+  const getPreviousVoters = useCallback(async () => {
+    const previousEvents = await contract.getPastEvents('VoterRegistered', {
+      fromBlock: 0,
+      toBlock: 'latest'
+    })
+
+    const previousVoters = previousEvents.map((event: any) => event.returnValues.voterAddress.toLowerCase())
+    setVoters(previousVoters)
+  }, [contract])
+
   const listenProposalsRegistered = useCallback(async () => {
     if (!contract) return
 
     await getPreviousProposals()
 
     contract.events.ProposalRegistered({ fromBlock: 'earliest' }, async (error: Error, event: any) => {
-      // setProposalsIds([...proposalsIds, parseInt(event.returnValues.proposalId)])
       await getPreviousProposals()
     })
   }, [contract, getPreviousProposals])
@@ -62,15 +71,10 @@ const ContractProvider: FC<Props> = ({ children }) => {
   const listenVotersRegistered = useCallback(async () => {
     if (!contract) return
 
-    const previousEvents = await contract.getPastEvents('VoterRegistered', {
-      fromBlock: 0,
-      toBlock: 'latest'
-    })
-    const previousVoters = previousEvents.map((event: any) => event.returnValues.voterAddress.toLowerCase())
-    setVoters(previousVoters)
+    await getPreviousVoters()
 
-    contract.events.VoterRegistered({ fromBlock: 'earliest' }, (error: Error, event: any) => {
-      setVoters([...voters, (event.returnValues.voterAddress as string).toLowerCase()])
+    contract.events.VoterRegistered({ fromBlock: 'earliest' }, async (error: Error, event: any) => {
+      await getPreviousVoters()
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract])

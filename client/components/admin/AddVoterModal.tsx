@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Dialog } from '@headlessui/react'
 import ModalContainer from '../common/ModalContainer';
 import useEth from '../../hooks/useEth';
-const { useForm } = require('react-hook-form');
+import { useForm } from 'react-hook-form';
 
 interface Props {
   isOpen: boolean;
@@ -12,7 +12,13 @@ interface Props {
 
 const AddVoterModal: FC<Props> = ({ isOpen, onClose, onSubmit }) => {
   const { state: { accounts } } = useEth()
-  const { register, handleSubmit, reset, formState: { errors } } = useForm()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm(
+    {
+      defaultValues: {
+        address: ''
+      }
+    }
+  )
 
   const handleOnSubmit = handleSubmit((values: { address: string }) => {
     onSubmit(values.address)

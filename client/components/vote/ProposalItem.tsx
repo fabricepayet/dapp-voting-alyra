@@ -5,7 +5,6 @@ import { ContractContext } from "../../contexts/ContractContext";
 import useEth from "../../hooks/useEth";
 import IVote from "../../interfaces/vote.interface";
 
-
 interface Props {
   proposalId: number;
   canVote?: boolean

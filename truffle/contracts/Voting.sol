@@ -79,13 +79,12 @@ contract Voting is Ownable {
     }
 
     /// @notice Get a proposal's information
-    /// @dev This function is external and only accessible by voters
+    /// @dev This function is external and accessible by anyone
     /// @param _id The id of the proposal
     /// @return Proposal The proposal's information (description, voteCount)
     function getOneProposal(uint256 _id)
         external
         view
-        onlyVoters
         returns (Proposal memory)
     {
         return proposalsArray[_id];

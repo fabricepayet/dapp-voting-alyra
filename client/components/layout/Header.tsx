@@ -10,7 +10,6 @@ interface Props {
   className?: string
 }
 
-
 const Header: FC<Props> = ({ className = "" }) => {
   const router = useRouter()
 
@@ -23,9 +22,7 @@ const Header: FC<Props> = ({ className = "" }) => {
       <Image src={Logo} alt={"Dapp Voting Alyra"} onClick={onClick} className="cursor-pointer" width={100} />
 
       <div className="gap-12 flex items-center">
-        {
-          router.pathname !== '/' && <Menu />
-        }
+        <Menu />
         <Wallet />
       </div>
     </div>

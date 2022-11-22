@@ -1,7 +1,12 @@
+import clsx from 'clsx';
 import React, { FC, useEffect, useState } from 'react';
 import useEth from '../../hooks/useEth';
 
-const WinningProposal: FC = () => {
+interface Props {
+  className?: string;
+}
+
+const WinningProposal: FC<Props> = ({ className = "" }) => {
   const { state: { contract, accounts } } = useEth()
   const [proposalDescription, setProposalDescription] = useState('')
 
@@ -17,7 +22,7 @@ const WinningProposal: FC = () => {
   }, [accounts, contract])
 
   return (
-    <div className="self-center">
+    <div className={clsx("self-center", className)}>
       <div className="text-4xl text-white uppercase">
         {"The winning proposal is"}
       </div>

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import AdminControls from "../components/admin/AdminControls";
 import Voters from "../components/admin/Voters";
